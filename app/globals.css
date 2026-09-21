@@ -1,0 +1,202 @@
+@import "tailwindcss";
+
+@theme {
+  /* Dark theme is the default. Light overrides live on [data-theme="light"]. */
+  --color-void: #070b09;
+  --color-panel: #0d1411;
+  --color-raised: #131d17;
+  --color-rule: #213028;
+  --color-rule-strong: #354a3d;
+
+  --color-ink: #eef5ef;
+  --color-dim: #c2d0c5;
+  --color-muted: #95a899;
+
+  --color-accent: #6ee7a0;
+
+  /* Semantic — drift classification only (terminal status colours) */
+  --color-ok: #6ee7a0;
+  --color-drift: #e6dc7a;
+  --color-unknown: #ee8b7e;
+
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* Values the canvas renderer and hero scrim read at runtime. */
+:root {
+  color-scheme: dark;
+  --plasma-rgb: 110, 231, 160;
+  --plasma-hi-rgb: 175, 247, 200;
+  --plasma-a0: 0.22;
+  --plasma-a1: 0.46;
+  --plasma-a2: 0.85;
+  --scrim-rgb: 7, 11, 9;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --color-void: #f2f6f2;
+  --color-panel: #e8eee9;
+  --color-raised: #dde6df;
+  --color-rule: #c8d4cb;
+  --color-rule-strong: #a9baad;
+
+  --color-ink: #0b1a10;
+  --color-dim: #2c4234;
+  --color-muted: #4a6152;
+
+  --color-accent: #0f7a3e;
+
+  --color-ok: #0f7a3e;
+  --color-drift: #866f00;
+  --color-unknown: #b23a28;
+
+  --plasma-rgb: 15, 122, 62;
+  --plasma-hi-rgb: 8, 92, 45;
+  --plasma-a0: 0.16;
+  --plasma-a1: 0.34;
+  --plasma-a2: 0.62;
+  --scrim-rgb: 242, 246, 242;
+}
+
+@layer base {
+  :root {
+    --rail: 0px;
+  }
+
+  @media (min-width: 1024px) {
+    :root {
+      --rail: 15rem;
+    }
+  }
+
+  * {
+    border-color: var(--color-rule);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-void);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-synthesis-weight: none;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-void);
+  }
+
+  /* Theme switch fades colours instead of snapping. */
+  body, header, footer {
+    transition: background-color 0.35s ease, color 0.35s ease;
+  }
+
+  :focus-visible {
+    outline: 1px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  h1, h2, h3, h4 {
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* The site sits on a visible character grid: a mono rail on the left
+     carries route metadata, content stays under ~72ch. */
+  .shell {
+    width: 100%;
+    max-width: 88rem;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .shell { padding-inline: 2.5rem; }
+  }
+
+  .rail-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .rail-grid {
+      grid-template-columns: var(--rail) minmax(0, 1fr);
+      gap: 3rem;
+    }
+  }
+
+  .meta {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    color: var(--color-muted);
+    font-weight: 400;
+  }
+
+  @media (min-width: 1024px) {
+    .meta { font-size: 0.9375rem; }
+  }
+
+  .ascii-scrim {
+    background: radial-gradient(
+      120% 90% at 18% 42%,
+      rgba(var(--scrim-rgb), 0.8) 0%,
+      rgba(var(--scrim-rgb), 0.52) 38%,
+      rgba(var(--scrim-rgb), 0.2) 68%,
+      rgba(var(--scrim-rgb), 0.62) 100%
+    );
+  }
+
+  .hairline {
+    border-top: 1px solid var(--color-rule);
+  }
+
+  .prose-measure {
+    max-width: 68ch;
+  }
+}
+
+@layer components {
+  .caret {
+    display: inline-block;
+    width: 0.55em;
+    height: 1em;
+    margin-left: 0.15em;
+    vertical-align: -0.12em;
+    background: var(--color-accent);
+    animation: caret-blink 1.05s steps(1) infinite;
+  }
+  @keyframes caret-blink {
+    50% { opacity: 0; }
+  }
+}

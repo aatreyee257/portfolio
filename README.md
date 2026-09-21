@@ -2,6 +2,8 @@
 
 
 Personal engineering site for a software developer working across cloud infrastructure, Terraform and applied AI.
+Website: https://aatreyeemukherjee.vercel.app/
+<img width="3418" height="1916" alt="image" src="https://github.com/user-attachments/assets/06f8d565-2cf7-4e82-9549-a962dff820ad" />
 
 ## Overview
 

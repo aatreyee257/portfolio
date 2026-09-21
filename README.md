@@ -3,8 +3,6 @@
 
 Personal engineering site for a software developer working across cloud infrastructure, Terraform and applied AI.
 
----
-
 ## Overview
 
 A multi-page Next.js site built around a single idea: an engineer who works in terminals and infrastructure should have a site that feels like one. The homepage hero is a live ASCII plasma field rendered on a canvas, the layout sits on a monospace metadata rail, and the calls to action behave like shell commands.

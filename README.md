@@ -1,5 +1,5 @@
 # Portfolio
-# Aatreyee Mukherjee — Portfolio
+
 
 Personal engineering site for a software developer working across cloud infrastructure, Terraform and applied AI.
 

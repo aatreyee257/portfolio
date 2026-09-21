@@ -7,6 +7,7 @@ import { site } from "@/data/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://aatreyeemukherjee.vercel.app"),
   title: {
     default: `${site.name} — Software Developer, Cloud Infrastructure, AI`,
     template: `%s — ${site.name}`,
